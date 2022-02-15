@@ -6,6 +6,7 @@ package components
 
 import (
   "fmt"
+  "log"
   "errors"
   "database/sql"
   _ "github.com/go-sql-driver/mysql"

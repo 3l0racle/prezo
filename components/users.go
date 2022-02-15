@@ -5,8 +5,11 @@ package components
 
 import (
   "fmt"
+  "errors"
+  "database/sql"
   "golang.org/x/crypto/bcrypt"
   "github.com/3l0racle/prezo/helpers"
+  _ "github.com/go-sql-driver/mysql"
 )
 
 /* Not exactly used just an initalization of what everyones day to day activities mlooks like */
@@ -44,7 +47,7 @@ type RecentNews struct{
 }
 
 func GetTopFiveRecentNews()([]RecentNews,error){
-  var trn []RecentNews
+  var trn []News
   //var rn RecentNews
   news,err := ListAllNews()
   if err != nil{
