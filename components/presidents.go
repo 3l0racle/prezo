@@ -74,7 +74,7 @@ func CreatePresident(p President,r RunningMate)error{
   }
   //create their login creds
   result,err = tx.Exec("INSERT INTO `prezo`.`users` (`email`,`userid`,`creatorid`,`password`,`active`,`updated`) VALUES(?,?,?,?,?,?);",p.Email,p.PresidentId,"SAM DID THIS!",passwordHash,true,false)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("ECPU: %s",err))
@@ -82,7 +82,7 @@ func CreatePresident(p President,r RunningMate)error{
     return errors.New("Server encountered an error while creating president")
   }
   result,err = tx.Exec("INSERT INTO `prezo`.`users` (`email`,`userid`,`creatorid`,`password`,`active`,`updated`) VALUES(?,?,?,?,?,?);",r.Email,r.RunningMateId,"SAM DID THIS!",rmpassHash,true,false)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("ECRU: %s",err))

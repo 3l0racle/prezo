@@ -27,7 +27,7 @@ func UpdateCandidateVotes(cvs CandidatesVotes)error{
   tx,err := db.Begin()
   if err != nil{
     _ = tx.Rollback()
-    e := helpers.LogErrorToFile("sql",fmt.Srintf("EPUCV: %s",err))
+    e := helpers.LogErrorToFile("sql",fmt.Sprintf("EPUCV: %s",err))
     helpers.Logerror(e)
     return errors.New("Server encountered an error while updating candidates vote count")
   }
@@ -78,7 +78,7 @@ func UpdateCandidateVotes(cvs CandidatesVotes)error{
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("EUPSVC: %s",err))
     helpers.Logerror(e)
-    return nil,errors.New("Server encountered an error while updating candidates vote count")
+    return errors.New("Server encountered an error while updating candidates vote count")
   }
   //update the candidates votes
   result,execErr = tx.Exec(`UPDATE candidates SET votes = ? WHERE candidateid = ?`,candidateVoteCount,cvs.CandidateId)

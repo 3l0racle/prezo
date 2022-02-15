@@ -7,8 +7,8 @@ package components
 import (
   "fmt"
   "errors"
-  "database/sql"
-  _ "github.com/go-sql-driver/mysql"
+  //"database/sql"
+//  _ "github.com/go-sql-driver/mysql"
   "github.com/3l0racle/prezo/helpers"
 )
 
@@ -59,7 +59,7 @@ func ShowVote(agentId string)(*Vote,error){
   return &v,nil
 }
 
-func ShowCountyVotes(countyName string)([]Votes,error){
+func ShowCountyVotes(countyName string)([]Vote,error){
   stmt := "SELECT * FROM `prezo`.`votes` WHERE (`county` = ?);"
   rows,err := db.Query(stmt,countyName)
   if err != nil{
@@ -82,7 +82,7 @@ func ShowCountyVotes(countyName string)([]Votes,error){
   return votes,nil
 }
 
-func ShowConstituencyVotes(consName string)([]Votes,error){
+func ShowConstituencyVotes(consName string)([]Vote,error){
   stmt := "SELECT * FROM `prezo`.`votes` WHERE (`constituency` = ?);"
   rows,err := db.Query(stmt,consName)
   if err != nil{
@@ -105,7 +105,7 @@ func ShowConstituencyVotes(consName string)([]Votes,error){
   return votes,nil
 }
 
-func ShowWardVotes(wardName string)([]Votes,error){
+func ShowWardVotes(wardName string)([]Vote,error){
   stmt := "SELECT * FROM `prezo`.`votes` WHERE (`wardname` = ?);"
   rows,err := db.Query(stmt,wardName)
   if err != nil{
