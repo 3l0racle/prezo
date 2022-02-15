@@ -10,7 +10,7 @@ import (
 //created like a transaction
 type RunningMate struct{
   NickName string
-  FisrtName string
+  FirstName string
   SecondName string
   LastName string
   Phone string
@@ -41,7 +41,7 @@ func ListRunningMates()([]RunningMate,error){
       helpers.Logerror(e)
       return nil,errors.New("Server encountered an error while listing all presidents.")
     }
-    mates = append(mates,r)
+    rmates = append(rmates,r)
   }
   return mates,nil
 }
@@ -55,7 +55,7 @@ func GetSeniorsRunningMate(snmId string)(*RunningMate,error){
     helpers.Logerror(e)
     return nil,errors.New(fmt.Sprintf("Server encountered an error while viewing running mate with id of %s",snmId))
   }
-  return &g,nil
+  return &r,nil
 }
 
 func GetRunningMate(rnmId string)(*RunningMate,error){
@@ -67,5 +67,5 @@ func GetRunningMate(rnmId string)(*RunningMate,error){
     helpers.Logerror(e)
     return nil,errors.New(fmt.Sprintf("Server encountered an error while viewing running mate with id of %s",rnmId))
   }
-  return &g,nil
+  return &r,nil
 }
