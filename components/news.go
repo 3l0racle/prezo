@@ -9,6 +9,7 @@ import (
   "errors"
   "database/sql"
   _ "github.com/go-sql-driver/mysql"
+  "github.com/3l0racle/prezo/helpers"
 )
 
 type News struct{
