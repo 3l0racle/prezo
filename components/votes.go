@@ -114,7 +114,7 @@ func ShowWardVotes(wardName string)([]Vote,error){
     return nil,errors.New("Server encountered an error while listing all ward votes.")
   }
   defer rows.Close()
-  var votes []Votes
+  var votes []Vote
   for rows.Next(){
     var v Vote
     err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
