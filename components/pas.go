@@ -101,7 +101,7 @@ func ViewPA(paid string)(*PresPA,error){
     helpers.Logerror(e)
     return nil,errors.New(fmt.Sprintf("Server encountered an error while viewing pa with id of %s",paid))
   }
-  return &pa,ni
+  return &pa,nil
 }
 
 func ListPAByCreator(creatorsId string)([]PresPA,error){
@@ -122,7 +122,7 @@ func ListPAByCreator(creatorsId string)([]PresPA,error){
       helpers.Logerror(e)
       return nil,errors.New("Server encountered an error while listing all PA's.")
     }
-    pas = append(pas,p)
+    pas = append(pas,pa)
   }
   return pas,nil
 }
