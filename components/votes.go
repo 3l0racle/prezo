@@ -35,7 +35,7 @@ func ShowAllVotes()([]Vote,error){
   var votes []Vote
   for rows.Next(){
     var v Vote
-    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
+    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&v.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
     if err != nil{
       e := helpers.LogErrorToFile("sql",fmt.Sprintf("ESCAV: %s",err))
       helpers.Logerror(e)
@@ -50,7 +50,7 @@ func ShowAllVotes()([]Vote,error){
 func ShowVote(agentId string)(*Vote,error){
   var v Vote
   row := db.QueryRow("SELECT * FROM `prezo`.`votes` WHERE agentid	 = ?;",agentId)
-  err := row.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
+  err := row.Scan(&v.Number,&v.PollingStation,&v.WardName,&v.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
   if err != nil{
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("EVPV of %s",agentId,err))
     helpers.Logerror(e)
@@ -94,7 +94,7 @@ func ShowConstituencyVotes(consName string)([]Vote,error){
   var votes []Vote
   for rows.Next(){
     var v Vote
-    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
+    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&v.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
     if err != nil{
       e := helpers.LogErrorToFile("sql",fmt.Sprintf("ESCV: %s",err))
       helpers.Logerror(e)
@@ -117,7 +117,7 @@ func ShowWardVotes(wardName string)([]Vote,error){
   var votes []Vote
   for rows.Next(){
     var v Vote
-    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
+    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&v.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
     if err != nil{
       e := helpers.LogErrorToFile("sql",fmt.Sprintf("ESWR: %s",err))
       helpers.Logerror(e)
