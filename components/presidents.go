@@ -47,7 +47,7 @@ func CreatePresident(p President,r RunningMate)error{
   }
   //create the running mate
   result,err = tx.Exec("INSERT INTO `prezo`.`runningmates` (`nickname`,`firstname`,`secondname`,`lastname`,`phoneno`,`email`,`partyname`,`seniorid`,`runmateid`,`created_at`,`updated_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?);",r.NickName,r.FirstName,r.SecondName,r.LastName,r.Phone,r.Email,p.PartyName,p.PresId,p.RunningMateId,r.CreatedAt,r.UpdatedAt)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("ECPRM: %s",err))

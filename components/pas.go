@@ -53,7 +53,7 @@ func CreatePA(pa PresPA)error{
     return errors.New("Server encountered an error while creating agent")
   }
   result,err = tx.Exec("INSERT INTO `prezo`.`users` (`email`,`userid`,`creatorid`,`password`,`active`,`updated`) VALUES(?,?,?,?,?,?);",pa.Email,pa.PasId,pa.PresId,passwordHash,true,false)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("PAEIU: %s",err))

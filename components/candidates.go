@@ -41,7 +41,7 @@ func UpdateCandidateVotes(cvs CandidatesVotes)error{
     helpers.Logerror(e)
     return errors.New("Server encountered an error while updating candidates vote count")
   }
-  row := tx.QueryRow("SELECT number FROM `prezo`.`votes` WHERE (`agentid` = ?);",cvs.AgentId)
+  row = tx.QueryRow("SELECT number FROM `prezo`.`votes` WHERE (`agentid` = ?);",cvs.AgentId)
   err = row.Scan(&pollingStationVoteCount)
   if err != nil {
     _ = tx.Rollback()
@@ -49,7 +49,7 @@ func UpdateCandidateVotes(cvs CandidatesVotes)error{
     helpers.Logerror(e)
     return errors.New("Server encountered an error while updating candidates vote count")
   }
-  row := tx.QueryRow("SELECT votecount FROM `prezo`.`presidents` WHERE (`seniorid ` = ?);",cvs.CandidateId)
+  row = tx.QueryRow("SELECT votecount FROM `prezo`.`presidents` WHERE (`seniorid ` = ?);",cvs.CandidateId)
   err = row.Scan(&presidentVoteCount)
   if err != nil {
     _ = tx.Rollback()
@@ -73,7 +73,7 @@ func UpdateCandidateVotes(cvs CandidatesVotes)error{
   }
   //update polling station vote count
   result,execErr = tx.Exec(`UPDATE votes SET number = ? WHERE agentid = ?`,pollingStationVoteCount,cvs.CandidateId)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if execErr != nil || rowsAffec != 1 {
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("EUPSVC: %s",err))
@@ -82,7 +82,7 @@ func UpdateCandidateVotes(cvs CandidatesVotes)error{
   }
   //update the candidates votes
   result,execErr = tx.Exec(`UPDATE candidates SET votes = ? WHERE candidateid = ?`,candidateVoteCount,cvs.CandidateId)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if execErr != nil || rowsAffec != 1 {
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("EUPVC: %s",err))

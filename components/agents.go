@@ -51,7 +51,7 @@ func CreateAgent(a Agent) error{
   }//&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt
   //set the total number of votes in thtat polling station to zero
   result,err = tx.Exec("INSERT INTO `prezo`.`votes` (`number`,`pollingstationname`,`wardname`,`constituency`,`county`,`agentid`,`created_at`,`updated_at`) VALUES(?,?,?,?,?,?,?,?);",0,a.PollingStation,a.WardName,a.Constituency,a.County,a.AgentId,a.CreatedAt,a.UpdatedAt)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("CAEIIVC: %s",err))
@@ -77,7 +77,7 @@ func CreateAgent(a Agent) error{
     return errors.New("Server encountered an error while creating agent")
   }
   result,err = tx.Exec("INSERT INTO `prezo`.`users` (`email`,`userid`,`creatorid`,`password`,`active`,`updated`) VALUES(?,?,?,?,?,?);",a.Email,a.AgentId,a.PaId,passwordHash,true,false)
-  rowsAffec,_ := result.RowsAffected()
+  rowsAffec,_ = result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("CAEIU: %s",err))

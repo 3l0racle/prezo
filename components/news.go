@@ -32,7 +32,7 @@ func CreateNews(n News)error{
     return errors.New("Server encountered an error while creating news, Try again later :).")
   }
   defer ins.Close()
-  res,err := ins.Exec(n.Title,n.Description,n.NewsId,n.Handled,,n.Level,n.CreatorId,n.ForEveryone,n.CreatedAt,n.UpdatedAt)
+  res,err := ins.Exec(n.Title,n.Description,n.NewsId,n.Handled,n.Level,n.CreatorId,n.ForEveryone,n.CreatedAt,n.UpdatedAt)
   rowsAffec, _  := res.RowsAffected()
   if err != nil || rowsAffec != 1{
     e := LogErrorToFile("sql",fmt.Sprintf("EZRAWCN: %s",err))
@@ -140,7 +140,7 @@ func ListAllNews()([]News,error){
   var news []News
   for rows.Next(){
     var n News
-    err = rows.Scan(&n.Title,&n.Description,,&n.NewsId,&n.Handled,&n.Level,&n.CreatorId,&n.ForEveryone,&n.CreatedAt,&n.UpdatedAt)
+    err = rows.Scan(&n.Title,&n.Description,&n.NewsId,&n.Handled,&n.Level,&n.CreatorId,&n.ForEveryone,&n.CreatedAt,&n.UpdatedAt)
     if err != nil{
       e := helpers.LogErrorToFile("sql",fmt.Sprintf("ESAN: %s",err))
       helpers.Logerror(e)
