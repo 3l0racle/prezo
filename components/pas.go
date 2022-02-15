@@ -97,11 +97,11 @@ func ViewPA(paid string)(*PresPA,error){
   row := db.QueryRow("SELECT * FROM `prezo`.`pa` WHERE paid	 = ?;",paid)
   err := row.Scan(&pa.FirstName,&pa.SecondName,&pa.Phone,&pa.Email,&pa.IdNumber,&pa.PasId,&pa.PresId,&pa.CreatedAt,&pa.UpdatedAt)
   if err != nil{
-    e := helpers.LogErrorToFile("sql",fmt.Sprintf("EVPA with id %s %s",agentId,err))
+    e := helpers.LogErrorToFile("sql",fmt.Sprintf("EVPA with id %s %s",paid,err))
     helpers.Logerror(e)
     return nil,errors.New(fmt.Sprintf("Server encountered an error while viewing pa with id of %s",paid))
   }
-  return &v,ni
+  return &pa,ni
 }
 
 func ListPAByCreator(creatorsId string)([]PresPA,error){
