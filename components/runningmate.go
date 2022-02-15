@@ -43,7 +43,7 @@ func ListRunningMates()([]RunningMate,error){
     }
     rmates = append(rmates,r)
   }
-  return mates,nil
+  return rmates,nil
 }
 
 func GetSeniorsRunningMate(snmId string)(*RunningMate,error){

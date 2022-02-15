@@ -32,7 +32,7 @@ func ShowAllVotes()([]Vote,error){
     return nil,errors.New("Server encountered an error while listing all votes.")
   }
   defer rows.Close()
-  var votes []Votes
+  var votes []Vote
   for rows.Next(){
     var v Vote
     err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
@@ -68,10 +68,10 @@ func ShowCountyVotes(countyName string)([]Vote,error){
     return nil,errors.New("Server encountered an error while listing all county votes.")
   }
   defer rows.Close()
-  var votes []Votes
+  var votes []Vote
   for rows.Next(){
     var v Vote
-    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
+    err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&v.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)
     if err != nil{
       e := helpers.LogErrorToFile("sql",fmt.Sprintf("ESCNV: %s",err))
       helpers.Logerror(e)
@@ -91,7 +91,7 @@ func ShowConstituencyVotes(consName string)([]Vote,error){
     return nil,errors.New("Server encountered an error while listing all constituency votes.")
   }
   defer rows.Close()
-  var votes []Votes
+  var votes []Vote
   for rows.Next(){
     var v Vote
     err = rows.Scan(&v.Number,&v.PollingStation,&v.WardName,&V.Constituency,&v.County,&v.AgentId,&v.CreatedAt,&v.UpdatedAt)

@@ -5,6 +5,7 @@ package components
 
 import (
   "fmt"
+  "log"
   "errors"
   "database/sql"
   "golang.org/x/crypto/bcrypt"
@@ -80,7 +81,7 @@ func Authenticate(password,email string)(bool,string){
     helpers.Logerror(e)
     return false,userId
   }
-  return true,userID
+  return true,userId
 }
 
 
