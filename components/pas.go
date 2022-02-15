@@ -31,7 +31,7 @@ func CreatePA(pa PresPA)error{
   tx,err := db.Begin()
   if err != nil{
     _ = tx.Rollback()
-    e := helpers.LogErrorToFile("sql",fmt.Srintf("EPCPPA: %s",err))
+    e := helpers.LogErrorToFile("sql",fmt.Sprintf("EPCPPA: %s",err))
     helpers.Logerror(e)
     return errors.New("Server encountered an error while creating agent")
   }
@@ -45,7 +45,7 @@ func CreatePA(pa PresPA)error{
     return errors.New("Server encountered an error while inserting into PA")
   }
   var passwordHash []byte
-  passwordHash,err = bcrypt.GenerateFromPassword([]byte(pa.AgentId),bcrypt.DefaultCost)
+  passwordHash,err = bcrypt.GenerateFromPassword([]byte(pa.PasId),bcrypt.DefaultCost)
   if err != nil || rowsAffec != 1 {
     _ = tx.Rollback()
     e := helpers.LogErrorToFile("passgen",fmt.Sprintf("CPAEGPH: %s",err))

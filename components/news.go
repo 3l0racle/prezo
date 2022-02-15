@@ -36,8 +36,8 @@ func CreateNews(n News)error{
   res,err := ins.Exec(n.Title,n.Description,n.NewsId,n.Handled,n.Level,n.CreatorId,n.ForEveryone,n.CreatedAt,n.UpdatedAt)
   rowsAffec, _  := res.RowsAffected()
   if err != nil || rowsAffec != 1{
-    e := LogErrorToFile("sql",fmt.Sprintf("EZRAWCN: %s",err))
-    logError(e)
+    e := helpers.LogErrorToFile("sql",fmt.Sprintf("EZRAWCN: %s",err))
+    helpers.Logerror(e)
     return errors.New("Server encountered an error while creating deal.")
   }
   return nil
@@ -64,7 +64,7 @@ func DeleteNews(newsId string)error{
 
 func MarkNewAsHandled(newsId string)error{
   upStmt := "UPDATE `prezo`.`news` SET `handled` = ? WHERE (`newsid` = ?);";
-  stmt,er := db.Prepare(upStmt)
+  stmt,err := db.Prepare(upStmt)
   if err != nil{
     e := helpers.LogErrorToFile("sql",fmt.Sprintf("EMNH: %s",err))
     helpers.Logerror(e)
