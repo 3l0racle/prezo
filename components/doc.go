@@ -11,9 +11,9 @@ func Documentation(args ...interface{}){
   if len(args) <= 0{
     Help()
   }
-  if args == "Errors"{
+  /*if args == "Errors"{
     ErrorStractures()
-  }
+  }*/
 }
 
 func ErrorStractures(){
@@ -91,7 +91,7 @@ func ErrorStractures(){
 
 func Help(){
   fmt.Println("[+] DOCUMENTATION For PRESIDENTIAL VOTER COUNTER")
-  fmt.Prinln("")
+  fmt.Println("")
   desc := `
   /*
     * All data is constructed before input no matter where it's from build it the write else you're fuckked

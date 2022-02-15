@@ -135,7 +135,7 @@ func GetAllCandidatesVotesFrmAPerticularPollingStation(agentId,psName string)(*C
 
 func CountCandidateVotes(cvs []CandidatesVotes) (int,error){
   var count int
-  for _,cv := range CandidatesVotes {
+  for _,cv := range cvs {
     count += cv.Votes
   }
   return count,nil
