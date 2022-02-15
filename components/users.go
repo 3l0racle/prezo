@@ -46,7 +46,7 @@ type RecentNews struct{
   UpdatedAt string
 }
 
-func GetTopFiveRecentNews()([]RecentNews,error){
+func GetTopFiveRecentNews()([]News,error){
   var trn []News
   //var rn RecentNews
   news,err := ListAllNews()
