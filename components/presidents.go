@@ -5,13 +5,14 @@ import (
   "fmt"
   "errors"
   "database/sql"
+  "golang.org/x/crypto/bcrypt"
   _ "github.com/go-sql-driver/mysql"
   "github.com/3l0racle/prezo/helpers"
 )
 
 type President struct{
   NickName string
-  FisrtName string
+  FirstName string
   SecondName string
   LastName string
   Phone string
@@ -30,14 +31,14 @@ func CreatePresident(p President,r RunningMate)error{
   tx,err := db.Begin()
   if err != nil{
     _ = tx.Rollback()
-    e := helpers.LogErrorToFile("sql",fmt.Srintf("EPIP: %s",err))
+    e := helpers.LogErrorToFile("sql",fmt.Sprintf("EPIP: %s",err))
     helpers.Logerror(e)
     return errors.New("Server encountered an error while creating president")
   }
   var result sql.Result
 
   //create the president
-  result,err = tx.Exec("INSERT INTO `prezo`.`presidents` (`nickname`,`firstname`,`secondname`,lastname,`phoneno`,`email`,`partyname`,`seniorid`,`runmateid`,`votecount`,`created_at`,`updated_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);",p.NickName,p.FirstName,p.SecondName,p.LastName,p.Phone,p.Email,p.PartyName,p.PresId,p.RunningMateId,p.VoteCount,a.CreatedAt,a.UpdatedAt)
+  result,err = tx.Exec("INSERT INTO `prezo`.`presidents` (`nickname`,`firstname`,`secondname`,lastname,`phoneno`,`email`,`partyname`,`seniorid`,`runmateid`,`votecount`,`created_at`,`updated_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);",p.NickName,p.FirstName,p.SecondName,p.LastName,p.Phone,p.Email,p.PartyName,p.PresidentId,p.RunningMateId,p.VoteCount,p.CreatedAt,p.UpdatedAt)
   rowsAffec,_ := result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
@@ -46,7 +47,7 @@ func CreatePresident(p President,r RunningMate)error{
     return errors.New("Server encountered an error while creating president")
   }
   //create the running mate
-  result,err = tx.Exec("INSERT INTO `prezo`.`runningmates` (`nickname`,`firstname`,`secondname`,`lastname`,`phoneno`,`email`,`partyname`,`seniorid`,`runmateid`,`created_at`,`updated_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?);",r.NickName,r.FirstName,r.SecondName,r.LastName,r.Phone,r.Email,p.PartyName,p.PresId,p.RunningMateId,r.CreatedAt,r.UpdatedAt)
+  result,err = tx.Exec("INSERT INTO `prezo`.`runningmates` (`nickname`,`firstname`,`secondname`,`lastname`,`phoneno`,`email`,`partyname`,`seniorid`,`runmateid`,`created_at`,`updated_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?);",r.NickName,r.FirstName,r.SecondName,r.LastName,r.Phone,r.Email,p.PartyName,p.PresidentId,p.RunningMateId,r.CreatedAt,r.UpdatedAt)
   rowsAffec,_ = result.RowsAffected()
   if err != nil || rowsAffec != 1{
     _ = tx.Rollback()
