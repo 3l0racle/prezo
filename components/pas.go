@@ -115,7 +115,7 @@ func ListPAByCreator(creatorsId string)([]PresPA,error){
   defer rows.Close()
   var pas []PresPA
   for rows.Next(){
-    var  p PresPA
+    var  pa PresPA
     err = rows.Scan(&pa.FirstName,&pa.SecondName,&pa.Phone,&pa.Email,&pa.IdNumber,&pa.PasId,&pa.PresId,&pa.CreatedAt,&pa.UpdatedAt)
     if err != nil{
       e := helpers.LogErrorToFile("sql",fmt.Sprintf("ESPPA: %s",err))
@@ -124,5 +124,5 @@ func ListPAByCreator(creatorsId string)([]PresPA,error){
     }
     pas = append(pas,p)
   }
-  return votes,nil
+  return pas,nil
 }
