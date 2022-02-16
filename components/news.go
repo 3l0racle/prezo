@@ -25,6 +25,7 @@ type News struct{
 }
 
 func CreateNews(n News)error{
+  fmt.Println("Im incide news ",n)
   var ins *sql.Stmt
   ins,err := db.Prepare("INSERT INTO `prezo`.`news` (title,description,newsid,handled,level,creatorid,foreveryone,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?);")
   if err !=  nil{
